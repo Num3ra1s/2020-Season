@@ -13,10 +13,6 @@ import frc.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 /**
  * Drivetrain subsystem.
  */
@@ -33,12 +29,6 @@ public class Drivetrain extends Subsystem {
   public Drivetrain() {
 
     //initialize variables (motor controllers with IDs)
-    //left: 2 + 3
-    //right: 1 + 4
-    
-    /**
-     * TODO: find proper id for spark controller
-     */
 
     frontRightController = new TalonSRX(1);
     frontLeftController = new TalonSRX(2);

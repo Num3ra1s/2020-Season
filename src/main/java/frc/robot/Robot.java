@@ -9,7 +9,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.commands.ShootDefault;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,6 +24,7 @@ public class Robot extends TimedRobot {
   
   //instantiate global variables
   public static Drivetrain dt;
+  public static Shooter sh;
   public static OI oi;
 
   /**
@@ -33,10 +36,15 @@ public class Robot extends TimedRobot {
 
     //initialize variables
     dt = new Drivetrain();
-    oi = new OI(dt);
+    sh = new Shooter();
+    oi = new OI(dt, sh);
 
     //set initial default command for drive train to default drive
     dt.initDefaultCommand(oi.defaultDrive());
+
+    //set default command for shooter to default shoot
+    sh.initDefaultCommand(new ShootDefault(sh, oi));
+    
   }
 
   /**

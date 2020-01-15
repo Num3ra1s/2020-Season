@@ -8,10 +8,14 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.commands.KajDrive;
+import frc.robot.commands.ShootConstant;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shooter;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -22,19 +26,36 @@ public class OI {
   //instantiate global variables
   private Command defaultDrive;
   Joystick xBox;
+  Button[] xBoxButtons;
+  double leftShoulder;
+  double rightShoulder;
   double leftY;
   double rightY;
   double rightX;
 
+  public static final double DEADBAND_WIDTH = 0.1;
 
   //constructor (takes drive train)
-  public OI(Drivetrain dt) {
+  public OI(Drivetrain dt, Shooter sh) {
     
     //initialize variables
     xBox = new Joystick(0);
+    xBoxButtons = getButtons(xBox);
+
     //defaultDrive = new TankDrive(dt, this);
     defaultDrive = new KajDrive(dt, this);
+
+    xBoxButtons[1].whileHeld(new ShootConstant(sh, this, 1, 1));
+    xBoxButtons[2].whileHeld(new ShootConstant(sh, this, 0.5, 0.5));
   }
+
+  public static Button[] getButtons(Joystick controller) {
+		Button[] controllerButtons = new Button[controller.getButtonCount() + 1];
+		for(int i = 1; i < controllerButtons.length; i++) {
+			controllerButtons[i] = new JoystickButton(controller, i);
+		}
+		return controllerButtons;
+	}
 
   public Command defaultDrive() {
 		return defaultDrive;
@@ -53,6 +74,16 @@ public class OI {
   public double rightXAxis(){
     rightX = xBox.getRawAxis(4) * 1;
     return rightX;
+  }
+
+  public double leftShoulder(){
+    leftShoulder = xBox.getRawAxis(2) * 1;
+    return leftShoulder;
+  }
+
+  public double rightShoulder(){
+    rightShoulder = xBox.getRawAxis(3) * 1;
+    return rightShoulder;
   }
 
 }
