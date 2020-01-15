@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
+import frc.robot.Utility;
 import frc.robot.subsystems.Drivetrain;
 
 public class KajDrive extends Command {
@@ -42,7 +43,13 @@ public class KajDrive extends Command {
         forwardPercent = oi.leftYAxis();
 
         double leftSideSpeed = (forwardPercent + turnPercent * (Math.abs(forwardPercent)));
-		double rightSideSpeed = (forwardPercent - turnPercent * (Math.abs(forwardPercent)));
+        double rightSideSpeed = (forwardPercent - turnPercent * (Math.abs(forwardPercent)));
+        
+        if(Utility.inRange(forwardPercent, 0, OI.DEADBAND_WIDTH * 2))
+		{
+			leftSideSpeed = turnPercent;
+			rightSideSpeed = -turnPercent;
+		}
 
         //call drivePercent with left percent and right percent speed
         dt.drivePercent(leftSideSpeed, rightSideSpeed);
