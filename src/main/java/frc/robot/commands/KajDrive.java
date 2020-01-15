@@ -39,12 +39,16 @@ public class KajDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        
+        //set turnPercent and forwardPercent to axes on the controller
         turnPercent = oi.rightXAxis();
         forwardPercent = oi.leftYAxis();
 
+        //calculate leftSideSpeed and rightSideSpeed
         double leftSideSpeed = (forwardPercent + turnPercent * (Math.abs(forwardPercent)));
         double rightSideSpeed = (forwardPercent - turnPercent * (Math.abs(forwardPercent)));
-        
+
+        //turn robot in place (based on turnPercent) if not moving forward
         if(Utility.inRange(forwardPercent, 0, OI.DEADBAND_WIDTH * 2))
 		{
 			leftSideSpeed = turnPercent;
@@ -53,8 +57,6 @@ public class KajDrive extends Command {
 
         //call drivePercent with left percent and right percent speed
         dt.drivePercent(leftSideSpeed, rightSideSpeed);
-
-        //dt.setSpark(oi.rightYAxis());
     }
 
     // Make this return true when this Command no longer needs to run execute()
