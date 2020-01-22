@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.commands.KajDrive;
 import frc.robot.commands.ShootConstant;
+import frc.robot.commands.ShootManual;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
@@ -46,7 +47,12 @@ public class OI {
     defaultDrive = new KajDrive(dt, this);
 
     xBoxButtons[1].whileHeld(new ShootConstant(sh, this, 1, 1));
-    xBoxButtons[2].whileHeld(new ShootConstant(sh, this, 0.5, 0.5));
+    xBoxButtons[2].whileHeld(new ShootConstant(sh, this, 0.25, 0.25));
+    xBoxButtons[3].whileHeld(new ShootConstant(sh, this, 0.5, 0.5));
+    xBoxButtons[4].whileHeld(new ShootConstant(sh, this, 0.75, 0.75));
+
+
+    xBoxButtons[5].whileHeld(new ShootManual(sh, this));
   }
 
   public static Button[] getButtons(Joystick controller) {
