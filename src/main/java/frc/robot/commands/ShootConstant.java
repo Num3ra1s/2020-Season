@@ -43,6 +43,9 @@ public class ShootConstant extends Command {
         //set speed to run bottom and top shooter axles
         sh.setBottomShooterSpeed(bottomPercent);
         sh.setTopShooterSpeed(topPercent);
+
+        System.out.println("Bottom RPM: " + sh.getBottomRotationsPerSecond());
+        System.out.println("Top RPM: " + sh.getTopRotationsPerSecond());
     }
 
     // Make this return true when this Command no longer needs to run execute()
