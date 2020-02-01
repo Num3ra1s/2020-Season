@@ -9,29 +9,26 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Intake;
 
-public class ShootConstant extends Command {
+public class IntakeDefault extends Command {
 
     //insantiate global variables
-    Shooter sh;
+    Intake in;
     OI oi;
-	double bottomPercent, topPercent;
     
     //constructor
-	public ShootConstant(Shooter shooter, OI operatorInterface, double bottomP, double topP) {
+	public IntakeDefault(Intake intake, OI operatorInterface) {
         
         //initialize variables
-        sh = shooter;
+        in = intake;
         oi = operatorInterface;
-        bottomPercent = bottomP;
-        topPercent = topP;
 
-        //needs shooter to run
-        requires(sh);
+        //needs intake to run
+        requires(in);
         
         //set command to be interruptible
-		//setInterruptible(true);
+		setInterruptible(true);
     }
     
     // Called just before this Command runs the first time
@@ -40,12 +37,8 @@ public class ShootConstant extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        //set speed to run bottom and top shooter axles
-        sh.setBottomShooterSpeed(bottomPercent);
-        sh.setTopShooterSpeed(topPercent);
-
-        System.out.println("Bottom RPS: " + sh.getBottomRotationsPerSecond());
-        System.out.println("Top RPS: " + sh.getTopRotationsPerSecond());
+        //set intake speed to 0
+        in.setIntakeSpeed(0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
