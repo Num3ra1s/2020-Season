@@ -11,12 +11,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.commands.KajDrive;
-import frc.robot.commands.ShootConstant;
-import frc.robot.commands.ShootManual;
-import frc.robot.commands.TankDrive;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Shooter;
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -37,7 +33,7 @@ public class OI {
   public static final double DEADBAND_WIDTH = 0.1;
 
   //constructor (takes drive train)
-  public OI(Drivetrain dt, Shooter sh) {
+  public OI(Drivetrain dt, Shooter sh, Intake in) {
     
     //initialize variables
     xBox = new Joystick(0);
@@ -46,13 +42,18 @@ public class OI {
     //defaultDrive = new TankDrive(dt, this);
     defaultDrive = new KajDrive(dt, this);
 
-    xBoxButtons[1].whileHeld(new ShootConstant(sh, this, 1, 1));
-    xBoxButtons[2].whileHeld(new ShootConstant(sh, this, 0.25, 0.25));
+   // xBoxButtons[1].whileHeld(new ShootConstant(sh, this, 1, 1));
+  //  xBoxButtons[2].whileHeld(new ShootConstant(sh, this, 0.25, 0.25));
     xBoxButtons[3].whileHeld(new ShootConstant(sh, this, 0.5, 0.5));
-    xBoxButtons[4].whileHeld(new ShootConstant(sh, this, 0.75, 0.75));
+  //  xBoxButtons[4].whileHeld(new ShootConstant(sh, this, 0.75, 0.75));
 
 
     xBoxButtons[5].whileHeld(new ShootManual(sh, this));
+    xBoxButtons[1].whileHeld(new IntakeBall(in, this, 1));
+    xBoxButtons[2].whileHeld(new IntakeBall(in, this, -1));
+
+    xBoxButtons[6].whenPressed(new ExtendIntake(in, this));
+    xBoxButtons[6].whenPressed(new RetractIntake(in, this));
   }
 
   public static Button[] getButtons(Joystick controller) {

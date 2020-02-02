@@ -11,14 +11,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.subsystems.Intake;
 
-public class IntakeDefault extends Command {
+public class RetractIntake extends Command {
 
     //insantiate global variables
     Intake in;
     OI oi;
     
     //constructor
-	public IntakeDefault(Intake intake, OI operatorInterface) {
+	public RetractIntake(Intake intake, OI operatorInterface) {
         
         //initialize variables
         in = intake;
@@ -26,9 +26,6 @@ public class IntakeDefault extends Command {
 
         //needs intake to run
         requires(in);
-        
-        //set command to be interruptible
-		setInterruptible(true);
     }
     
     // Called just before this Command runs the first time
@@ -37,8 +34,7 @@ public class IntakeDefault extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        //set intake speed to 0
-        in.setIntakeSpeed(0);
+        //retract intake
         in.retractIntake();
     }
 

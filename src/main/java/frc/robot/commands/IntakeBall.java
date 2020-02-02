@@ -26,7 +26,7 @@ public class IntakeBall extends Command {
         oi = operatorInterface;
         percent = per;
 
-        //needs shooter to run
+        //needs intake to run
         requires(in);
         
         //set command to be interruptible
@@ -39,7 +39,7 @@ public class IntakeBall extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        //set speed to run bottom and top shooter axles
+        //set speed to run intake
         in.setIntakeSpeed(percent);
     }
 

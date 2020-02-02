@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -15,25 +16,37 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 /**
- * Drivetrain subsystem.
+ * Intake subsystem.
  */
 public class Intake extends Subsystem {
   
-  //instantiate motor controllers
+  //instantiate motor controller
   private TalonSRX talon1;
+
+  private DoubleSolenoid sol;
   
   //constructor
   public Intake() {
       
-    //initialize motor controllers
-      talon1 = new TalonSRX(6);     
+    //initialize motor controller
+    talon1 = new TalonSRX(6);    
+    
+    //initalize double solenoids (pcm, port1, port2)
+    sol = new DoubleSolenoid(1, 0, 1);
   }
 
-  //ready ball
 
-  //set bottom motor speed
+  //set motor speed
   public void setIntakeSpeed(double speed){
     talon1.set(ControlMode.PercentOutput, speed);
+  }
+
+  public void extendIntake(){
+    sol.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void retractIntake(){
+    sol.set(DoubleSolenoid.Value.kReverse);
   }
 
   //set default command
