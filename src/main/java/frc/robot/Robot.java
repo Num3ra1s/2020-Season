@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.commands.IntakeDefault;
 import frc.robot.commands.ShootDefault;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 
@@ -29,6 +30,7 @@ public class Robot extends TimedRobot {
   public static Shooter sh;
   public static OI oi;
   public static Intake in;
+  public static Indexer ind;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -41,7 +43,8 @@ public class Robot extends TimedRobot {
     dt = new Drivetrain();
     sh = new Shooter();
     in = new Intake();
-    oi = new OI(dt, sh, in);
+    ind = new Indexer();
+    oi = new OI(dt, sh, in, ind);
 
     //set initial default command for drive train to default drive
     dt.initDefaultCommand(oi.defaultDrive());

@@ -33,7 +33,7 @@ public class OI {
   public static final double DEADBAND_WIDTH = 0.1;
 
   //constructor (takes drive train)
-  public OI(Drivetrain dt, Shooter sh, Intake in) {
+  public OI(Drivetrain dt, Shooter sh, Intake in, Indexer ind) {
     
     //initialize variables
     xBox = new Joystick(0);
@@ -47,13 +47,17 @@ public class OI {
     xBoxButtons[3].whileHeld(new ShootConstant(sh, this, 0.5, 0.5));
   //  xBoxButtons[4].whileHeld(new ShootConstant(sh, this, 0.75, 0.75));
 
+    //xBoxButtons[5].whileHeld(new ShootManual(sh, this));
+    //xBoxButtons[1].whileHeld(new IntakeBall(in, this, 1));
+    //xBoxButtons[2].whileHeld(new IntakeBall(in, this, -1));
 
-    xBoxButtons[5].whileHeld(new ShootManual(sh, this));
-    xBoxButtons[1].whileHeld(new IntakeBall(in, this, 1));
-    xBoxButtons[2].whileHeld(new IntakeBall(in, this, -1));
+    //xBoxButtons[6].whenPressed(new ExtendIntake(in, this));
+    //xBoxButtons[6].whenPressed(new RetractIntake(in, this));
 
-    xBoxButtons[6].whenPressed(new ExtendIntake(in, this));
-    xBoxButtons[6].whenPressed(new RetractIntake(in, this));
+    xBoxButtons[1].whileHeld(new IndexTowardsShooter(ind, this));
+    xBoxButtons[2].whileHeld(new IndexAwayShooter(ind, this));
+
+
   }
 
   public static Button[] getButtons(Joystick controller) {
