@@ -7,6 +7,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.commands.IntakeDefault;
@@ -32,6 +35,9 @@ public class Robot extends TimedRobot {
   public static Intake in;
   public static Indexer ind;
 
+  NetworkTableEntry xAng, dist;
+  double xAngle, distance;
+
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -54,6 +60,11 @@ public class Robot extends TimedRobot {
     
     //set default command for intake to default shoot
     in.initDefaultCommand(new IntakeDefault(in, oi));
+
+    NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    NetworkTable table = inst.getTable("database");
+    xAng = table.getEntry("xAngle");
+    dist = table.getEntry("distance");
   }
 
   /**
@@ -115,6 +126,12 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    
+    xAngle = xAng.getDouble(1);
+    distance = dist.getDouble(1);
+
+    System.out.println("ANGLE: " + xAngle);
+    System.out.println("DISTANCE: " + distance);
   }
 
   /**

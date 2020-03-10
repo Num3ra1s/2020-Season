@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.autonCommands;
+package frc.robot.pidCommands;
 
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.Timer;
@@ -62,18 +62,18 @@ public class DriveDistance extends Command {
 			distanceDirection = -1;
 		}
 		
-		p = Drivetrain.DRIVETRAIN_FAST_KP;
-		i = Drivetrain.DRIVETRAIN_FAST_KI;
-		d = Drivetrain.DRIVETRAIN_FAST_KD;
-		f = Drivetrain.DRIVETRAIN_FAST_KF;
+		p = Drivetrain.DRIVETRAIN_KP;
+		i = Drivetrain.DRIVETRAIN_KI;
+		d = Drivetrain.DRIVETRAIN_KD;
+		f = Drivetrain.DRIVETRAIN_KF;
 		
 		velocityScaling = VELOCITY_SCALING;
 		maxVelocityContrib = MAX_VELOCITY_CONTRIB;
 		
-		SmartDashboard.putNumber("p", p);
-		SmartDashboard.putNumber("i", i);
-		SmartDashboard.putNumber("d", d);
-		SmartDashboard.putNumber("f", f);
+		SmartDashboard.putNumber("driveP", p);
+		SmartDashboard.putNumber("driveI", i);
+		SmartDashboard.putNumber("driveD", d);
+		SmartDashboard.putNumber("driveF", f);
 		
 		SmartDashboard.putNumber("velocityScaling", velocityScaling);
 		SmartDashboard.putNumber("maxVelocityContrib", maxVelocityContrib);
@@ -103,22 +103,22 @@ public class DriveDistance extends Command {
 		isFinished = false;
 		fuzz = .001;
 		
-		p = SmartDashboard.getNumber("p", p);
-		i = SmartDashboard.getNumber("i", i);
-		d = SmartDashboard.getNumber("d", d);
-		f = SmartDashboard.getNumber("f", f);
+		p = SmartDashboard.getNumber("driveP", p);
+		i = SmartDashboard.getNumber("driveI", i);
+		d = SmartDashboard.getNumber("driveD", d);
+		f = SmartDashboard.getNumber("driveF", f);
 		
 		dt.setConstants(p, i, d, f);
-		System.out.println(p);
-		System.out.println(i);
-		System.out.println(d);
-		System.out.println(f);
+		// System.out.println(p);
+		// System.out.println(i);
+		// System.out.println(d);
+		// System.out.println(f);
 		
 		velocityScaling = SmartDashboard.getNumber("velocityScaling", velocityScaling);
 		maxVelocityContrib = SmartDashboard.getNumber("maxVelocityContrib", maxVelocityContrib);
 		
-		System.out.println(maxVelocityContrib);
-		System.out.println(velocityScaling);
+		// System.out.println(maxVelocityContrib);
+		// System.out.println(velocityScaling);
 	}
 
 	@Override

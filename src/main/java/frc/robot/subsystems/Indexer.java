@@ -32,8 +32,8 @@ public class Indexer extends Subsystem {
 
   //set motor controllers to percents
  public void index(double spinPercent) {
-
-  double spinPercentActual = spinPercent *1;
+  //TODO: forward constant, also add definition of forward and backward to OI (-1 or 1)
+  double spinPercentActual = spinPercent * 1;
   motorController.set(ControlMode.PercentOutput, spinPercentActual);
  }
   //public void setSpark(double percent){

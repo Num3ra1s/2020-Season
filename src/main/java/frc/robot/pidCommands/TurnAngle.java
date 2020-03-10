@@ -5,12 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.autonCommands;
+package frc.robot.pidCommands;
 
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Utility;
 import frc.robot.subsystems.Drivetrain;
 
 public class TurnAngle extends Command {
@@ -28,7 +29,7 @@ public class TurnAngle extends Command {
 	private double tempD;
 	private double tempMaxIContrib;
 	private Timer timer;
-	private DriveTrain dt;
+	private Drivetrain dt;
 	private AHRS navx;
 	private double startAngle;
 	private double inputAngle;
@@ -43,7 +44,7 @@ public class TurnAngle extends Command {
 	
 	private EndAngleMeaning strategy;
 	
-	public TurnAngle(DriveTrain dt, AHRS navx, double inputAngle, EndAngleMeaning strat) {
+	public TurnAngle(Drivetrain dt, AHRS navx, double inputAngle, EndAngleMeaning strat) {
 		timer = new Timer();
 		this.dt = dt;
 		this.navx = navx;

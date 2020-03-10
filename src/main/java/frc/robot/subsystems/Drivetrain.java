@@ -34,16 +34,17 @@ public class Drivetrain extends Subsystem {
   private CANPIDController pidFrontLeft, pidFrontRight;
   private CANEncoder eFrontLeft, eFrontRight;
 
-  public static final double DRIVETRAIN_FAST_KP = 1.875;
-	public static final double DRIVETRAIN_FAST_KI = 0.006;
-	public static final double DRIVETRAIN_FAST_KD = 52.5;
-	public static final double DRIVETRAIN_FAST_KF = 0.15;
+  public static final double DRIVETRAIN_KP = 1.875;
+	public static final double DRIVETRAIN_KI = 0.006;
+	public static final double DRIVETRAIN_KD = 52.5;
+	public static final double DRIVETRAIN_KF = 0.15;
 
   //motor controllers
   private CANSparkMax[] allMotorControllers;
 
   //private static final double CLOSED_LOOP_VOLTAGE_SATURATION = 10;
   //private static final int CAN_TIMEOUT = 10;
+  //TODO: correct for drivetrain
 	private static final int WHEEL_DIAMETER = 6;
 	private static final int ENCODER_TICKS_PER_REVOLUTION = 4096;
 	private static final double GEAR_RATIO = 1.0 / 1.0;
@@ -182,16 +183,16 @@ public class Drivetrain extends Subsystem {
     //frontLeftController.restoreFactoryDefaults();
     
     //TODO: does this do all the things? no nominal or can timeout
-    pidFrontLeft.setP(DRIVETRAIN_FAST_KP);
-    pidFrontLeft.setI(DRIVETRAIN_FAST_KI);
-    pidFrontLeft.setD(DRIVETRAIN_FAST_KD);
-    pidFrontLeft.setFF(DRIVETRAIN_FAST_KF);
+    pidFrontLeft.setP(DRIVETRAIN_KP);
+    pidFrontLeft.setI(DRIVETRAIN_KI);
+    pidFrontLeft.setD(DRIVETRAIN_KD);
+    pidFrontLeft.setFF(DRIVETRAIN_KF);
     pidFrontLeft.setOutputRange(-1, 1);
 
-    pidFrontRight.setP(DRIVETRAIN_FAST_KP);
-    pidFrontRight.setI(DRIVETRAIN_FAST_KI);
-    pidFrontRight.setD(DRIVETRAIN_FAST_KD);
-    pidFrontRight.setFF(DRIVETRAIN_FAST_KF);
+    pidFrontRight.setP(DRIVETRAIN_KP);
+    pidFrontRight.setI(DRIVETRAIN_KI);
+    pidFrontRight.setD(DRIVETRAIN_KD);
+    pidFrontRight.setFF(DRIVETRAIN_KF);
     pidFrontRight.setOutputRange(-1, 1);
   }
   
