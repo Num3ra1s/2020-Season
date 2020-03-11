@@ -45,7 +45,7 @@ public class ShootBalls extends CommandGroup {
     //spin indexer
     addSequential(new IndexTowardsShooter(ind, oi));
     //wait
-    //check if angle has changed, if changed end
+    //check if angle has changed, if changed end (make that broad) OR just turn back to angle ask driveteam
     //spin indexer to get ball up against
     //check for another ball, if not end
     //spin shooter

@@ -7,6 +7,9 @@
 
 package frc.robot;
 
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -65,6 +68,9 @@ public class Robot extends TimedRobot {
     NetworkTable table = inst.getTable("database");
     xAng = table.getEntry("xAngle");
     dist = table.getEntry("distance");
+
+    UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture();
+    cam1.setResolution(321 * 2, 241 * 2);
   }
 
   /**
